@@ -24,7 +24,11 @@ const blog = createBlog({
 });
 
 describe("Elysia feed plugin", () => {
-  const app = blogFeeds(blog);
+  const app = blogFeeds(blog, {
+    atom: "/blog/atom.xml",
+    json: "/blog/feed.json",
+    rss: "/blog/rss.xml",
+  });
 
   test.each([
     ["/blog/rss.xml", "application/rss+xml"],

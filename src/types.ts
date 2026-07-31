@@ -166,3 +166,9 @@ export type BlogFeedSet = {
   json: string;
   rss: string;
 };
+
+export type BlogFeedPaths = {
+  atom: `/${string}`;
+  json: `/${string}`;
+  rss: `/${string}`;
+};

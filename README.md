@@ -60,10 +60,16 @@ Mount all three standard feed formats with the optional Elysia plugin:
 ```ts
 import { blogFeeds } from "@absolutejs/blog/elysia";
 
-new Elysia().use(blogFeeds(blog));
+new Elysia().use(
+  blogFeeds(blog, {
+    rss: "/blog/rss.xml",
+    atom: "/blog/atom.xml",
+    json: "/blog/feed.json",
+  }),
+);
 ```
 
-The defaults are:
+The literal paths preserve exact Elysia and Eden route inference:
 
 - `/blog/rss.xml`
 - `/blog/atom.xml`
