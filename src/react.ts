@@ -61,13 +61,24 @@ export const useReadingTime = (
       return;
     }
 
-    const update = () =>
-      setReadingTime(
-        estimateReadingTime(article.innerText, {
-          minimumMinutes,
-          wordsPerMinute,
-        }),
-      );
+    const update = () => {
+      const nextReadingTime = estimateReadingTime(article.innerText, {
+        minimumMinutes,
+        wordsPerMinute,
+      });
+
+      setReadingTime((currentReadingTime) => {
+        if (
+          currentReadingTime?.minutes === nextReadingTime.minutes &&
+          currentReadingTime.words === nextReadingTime.words &&
+          currentReadingTime.wordsPerMinute === nextReadingTime.wordsPerMinute
+        ) {
+          return currentReadingTime;
+        }
+
+        return nextReadingTime;
+      });
+    };
     const observer = new MutationObserver(update);
 
     update();
